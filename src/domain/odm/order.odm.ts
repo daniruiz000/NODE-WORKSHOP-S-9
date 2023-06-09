@@ -1,6 +1,12 @@
 import { Order, IOrder } from "../entities/order-entity";
 import { Document } from "mongoose";
 
+const getAllOrdersByUser = async (id: string, page: number, limit: number): Promise<any> => {
+  return await Order.find({ user: id })
+    .limit(limit)
+    .skip((page - 1) * limit);
+};
+
 const getAllOrders = async (page: number, limit: number): Promise<any> => {
   return await Order.find()
     .limit(limit)
@@ -31,6 +37,7 @@ const updateOrder = async (id: string, orderData: any): Promise<Document<IOrder>
 };
 
 export const orderOdm = {
+  getAllOrdersByUser,
   getAllOrders,
   getOrderCount,
   getOrderById,
