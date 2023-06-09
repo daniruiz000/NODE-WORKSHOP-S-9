@@ -102,14 +102,14 @@ const cakeSchema = new Schema<ICake>(
   {
     name: { type: String, trim: true, minLength: [3, " Al menos tres letras para el nombre"], maxLength: [40, "Nombre demasiado largo, máximo de 20 caracteres"], required: true },
     ingredient: {
-      type: String, 
+      type: String,
       enum: Object.values(ingredientsCake), // Validar los valores del enum
-      required: true
+      required: true,
     },
     allergens: {
       type: String,
       enum: Object.values(allergensEnum), // Validar los valores del enum
-      required: true
+      required: true,
     },
     description: { type: String, required: true },
     price: { type: Number, min: [0, "Mínimo 0 para precio"] },
