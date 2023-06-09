@@ -12,46 +12,87 @@
  *        - price
  *      properties:
  *        name:
- *          type: string
- *          description: Nombre de la tarta
- *        ingredient:
- *          type: string
- *          description: Ingredientes que tiene al tarta
- *        allergens:
- *          type: string
- *          description: Alergenos de la tarta
- *        description:
- *          type: string
- *          description: Descripcion de la tarta
- *        price:
- *          type:number
- *          description: Precio de la tarta
+ *         type: string
+ *         minLength: 3
+ *         maxLength: 40
+ *       ingredient:
+ *         type: string
+ *         enum:
+ *           - Harina
+ *           - Mantequilla
+ *           - Azúcar
+ *           - Huevos
+ *           - Leche
+ *           - Crema
+ *           - Levadura
+ *           - Frutas
+ *           - Vainilla
+ *           - Ralladura de cítricos
+ *           - Especias
+ *           - Chocolate
+ *           - Nueces
+ *           - Almendras
+ *       allergens:
+ *         type: string
+ *         enum:
+ *           - Lactosa
+ *           - Gluten
+ *           - Fructosa
+ *           - Frutos secos
+ *           - Soja
+ *           - Mariscos
+ *           - Pescado
+ *           - Huevos
+ *           - Mostaza
+ *           - Sésamo
+ *           - Sulfitos
+ *       description:
+ *         type: string
+ *       price:
+ *         type: number
+ *         minimum: 1
  */
 
 import mongoose from "mongoose";
 
 // Declaramos nuestro esquema que nos permite declarar nuestros objetos y crearle restricciones.
 const Schema = mongoose.Schema;
-
 export enum allergensEnum {
-  Lactosa = "Lactosa",
-  Gluten = "Gluten",
-  Fructosa = "Fructosa",
-  Nuts = "Frutos secos",
-  Soja = "Soja",
-  Mariscos = "Mariscos",
-  Pescado = "Pescado",
-  Huevos = "Huevos",
-  Mostaza = "Mostaza",
-  Sesamo = "Sésamo",
-  Sulfitos = "Sulfitos",
-};
+  lactose = "Lactosa",
+  gluten = "Gluten",
+  fructose = "Fructosa",
+  nuts = "Frutos secos",
+  soy = "Soja",
+  shellfish = "Mariscos",
+  fish = "Pescado",
+  eggs = "Huevos",
+  mustard = "Mostaza",
+  sesame = "Sésamo",
+  sulfites = "Sulfitos",
+}
+
+export enum ingredientsCake {
+  HARINA = "Harina",
+  MANTEQUILLA = "Mantequilla",
+  AZUCAR = "Azúcar",
+  HUEVOS = "Huevos",
+  LECHE = "Leche",
+  CREMA = "Crema",
+  LEVADURA = "Levadura",
+  FRUTAS = "Frutas",
+  VAINILLA = "Vainilla",
+  RALLADURA_CITRICOS = "Ralladura de cítricos",
+  ESPECIAS = "Especias",
+  CHOCOLATE = "Chocolate",
+  NUECES = "Nueces",
+  ALMENDRAS = "Almendras",
+}
 
 // Interface de Cake
 export interface ICake {
   name: string;
-  ingredient: string[];
-  allergens: allergensEnum[];
+  ingredient: ingredientsCake;
+  allergens: allergensEnum;
   description: string;
   price: number;
 }
@@ -60,9 +101,13 @@ export interface ICake {
 const cakeSchema = new Schema<ICake>(
   {
     name: { type: String, trim: true, minLength: [3, " Al menos tres letras para el nombre"], maxLength: [40, "Nombre demasiado largo, máximo de 20 caracteres"], required: true },
-    ingredient: { type: [String], required: true },
+    ingredient: {
+      type: String, 
+      enum: Object.values(ingredientsCake), // Validar los valores del enum
+      required: true
+    },
     allergens: {
-      type: [String], // Cambiar a tipo string
+      type: String,
       enum: Object.values(allergensEnum), // Validar los valores del enum
       required: true
     },
