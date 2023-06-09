@@ -1,12 +1,11 @@
-import { type Request, type Response, type NextFunction } from "express";
+import { Response, NextFunction } from "express";
 import { orderOdm } from "../odm/order.odm";
-import { Book } from "../entities/book-entity";
 
 export const getOrdersByUser = async (req: any, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const id = req.params.id;
+    const userId = req.params.id;
 
-    if (req.user.id !== id && req.user.email !== "admin@gmail.com") {
+    if (req.user.id !== userId && req.user.email !== "admin@gmail.com") {
       res.status(401).json({ error: "No tienes autorización para realizar esta operación" });
       return;
     }
@@ -14,7 +13,7 @@ export const getOrdersByUser = async (req: any, res: Response, next: NextFunctio
     const page = req.query.page ? parseInt(req.query.page as string) : 1;
     const limit = req.query.limit ? parseInt(req.query.limit as string) : 10;
 
-    const orders = await orderOdm.getAllOrdersByUser(id, page, limit);
+    const orders = await orderOdm.getAllOrdersByUser(userId, page, limit);
 
     const totalElements = await orderOdm.getOrderCount();
 
@@ -33,9 +32,7 @@ export const getOrdersByUser = async (req: any, res: Response, next: NextFunctio
 
 export const getOrders = async (req: any, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const id = req.params.id;
-
-    if (req.user.id !== id && req.user.email !== "admin@gmail.com") {
+    if (req.user.email !== "admin@gmail.com") {
       res.status(401).json({ error: "No tienes autorización para realizar esta operación" });
       return;
     }
@@ -60,30 +57,34 @@ export const getOrders = async (req: any, res: Response, next: NextFunction): Pr
   }
 };
 
-export const getOrderById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const getOrderById = async (req: any, res: Response, next: NextFunction): Promise<void> => {
   try {
     const id = req.params.id;
     const order = await orderOdm.getOrderById(id);
 
     if (order) {
       const temporalOrder = order.toObject();
-      const includeBooks = req.query.includeBooks === "true";
-      if (includeBooks) {
-        const books = await Book.find({ order: id });
-        temporalOrder.books = books;
+      if (req.user.id !== temporalOrder.user && req.user.email !== "admin@gmail.com") {
+        res.status(401).json({ error: "No tienes autorización para realizar esta operación" });
+      } else {
+        res.status(200).json(temporalOrder);
       }
-
-      res.json(temporalOrder);
     } else {
-      res.status(404).json({});
+      res.status(404).json({ error: "Pedido no encontrado." });
     }
   } catch (error) {
     next(error);
   }
 };
 
-export const createOrder = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+export const createOrder = async (req: any, res: Response, next: NextFunction): Promise<void> => {
   try {
+    const id = req.params.id;
+
+    if (req.order.id !== id && req.order.email !== "admin@gmail.com") {
+      res.status(401).json({ error: "No tienes autorización para realizar esta operación" });
+      return;
+    }
     const createdOrder = await orderOdm.createOrder(req.body);
     res.status(201).json(createdOrder);
   } catch (error) {
@@ -104,7 +105,7 @@ export const deleteOrder = async (req: any, res: Response, next: NextFunction): 
     if (orderDeleted) {
       res.json(orderDeleted);
     } else {
-      res.status(404).json({});
+      res.status(404).json({ error: "Pedido no encontrado." });
     }
   } catch (error) {
     next(error);
@@ -124,12 +125,10 @@ export const updateOrder = async (req: any, res: Response, next: NextFunction): 
     if (orderToUpdate) {
       Object.assign(orderToUpdate, req.body);
       await orderToUpdate.save();
-      // Quitamos pass de la respuesta
       const orderToSend: any = orderToUpdate.toObject();
-      delete orderToSend.password;
       res.json(orderToSend);
     } else {
-      res.status(404).json({});
+      res.status(404).json({ error: "Pedido no encontrado." });
     }
   } catch (error) {
     next(error);
@@ -137,6 +136,7 @@ export const updateOrder = async (req: any, res: Response, next: NextFunction): 
 };
 
 export const orderService = {
+  getOrdersByUser,
   getOrders,
   getOrderById,
   createOrder,
