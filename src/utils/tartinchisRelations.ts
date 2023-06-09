@@ -27,7 +27,7 @@ export const tartinchisRelations = async (): Promise<void> => {
 
     for (let i = 0; i < categories.length; i++) {
       const category = categories[i]
-      category.cakes = [cakes[generateRandom(0, cakes.length)], cakes[generateRandom(0, cakes.length)], cakes[generateRandom(0, cakes.length)]]
+      category.cakes = [cakes[generateRandom(0, cakes.length)].id, cakes[generateRandom(0, cakes.length)].id, cakes[generateRandom(0, cakes.length)].id]
       await category.save();
     }
 

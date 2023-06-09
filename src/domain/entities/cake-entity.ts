@@ -33,11 +33,25 @@ import mongoose from "mongoose";
 // Declaramos nuestro esquema que nos permite declarar nuestros objetos y crearle restricciones.
 const Schema = mongoose.Schema;
 
+export enum allergensEnum {
+  Lactosa = "Lactosa",
+  Gluten = "Gluten",
+  Fructosa = "Fructosa",
+  Nuts = "Frutos secos",
+  Soja = "Soja",
+  Mariscos = "Mariscos",
+  Pescado = "Pescado",
+  Huevos = "Huevos",
+  Mostaza = "Mostaza",
+  Sesamo = "Sésamo",
+  Sulfitos = "Sulfitos",
+};
+
 // Interface de Cake
 export interface ICake {
   name: string;
   ingredient: string[];
-  allergens: string[];
+  allergens: allergensEnum[];
   description: string;
   price: number;
 }
@@ -47,9 +61,13 @@ const cakeSchema = new Schema<ICake>(
   {
     name: { type: String, trim: true, minLength: [3, " Al menos tres letras para el nombre"], maxLength: [40, "Nombre demasiado largo, máximo de 20 caracteres"], required: true },
     ingredient: { type: [String], required: true },
-    allergens: { type: [String], required: true },
+    allergens: {
+      type: [String], // Cambiar a tipo string
+      enum: Object.values(allergensEnum), // Validar los valores del enum
+      required: true
+    },
     description: { type: String, required: true },
-    price: { type: Number, min: [1, "Mínimo 1 página"] },
+    price: { type: Number, min: [0, "Mínimo 0 para precio"] },
   },
   { timestamps: true } // Cada vez que se modifique un documento refleja la hora y fecha de modificación
 );
