@@ -80,9 +80,9 @@ const authorSchema = new Schema<IAuthor>(
       unique: true, // indica que no puede haber otra entidad con esta propiedad que tenga el mismo valor.
       validate: {
         validator: (text: string) => validator.isEmail, // Validamos haciendo uso de la librería validator y la función isEmail que incorpora.
-        message: "Email incorrecto"
+        message: "Email incorrecto",
       },
-      required: true
+      required: true,
     },
     password: {
       type: String,
@@ -90,11 +90,11 @@ const authorSchema = new Schema<IAuthor>(
       unique: true,
       minLength: [8, "La contraseña debe tener al menos 8 caracteres"],
       select: false, // Indica que no lo deseamos mostrar cuando se realicen las peticiones.
-      required: true
+      required: true,
     },
     name: { type: String, trim: true, minLength: [3, "Al menos tres letras para el nombre"], maxLength: [22, "Nombre demasiado largo, máximo de 22 caracteres"], required: true },
     country: { type: String, trim: true, minLength: [3, "Al menos tres letras para el país"], maxLength: [20, "País demasiado largo, máximo de 20 caracteres"], enum: AllowedCountries, uppercase: true, required: true },
-    image: { type: String, required: false }
+    image: { type: String, required: false },
   },
   { timestamps: true } // Cada vez que se modifique un documento refleja la hora y fecha de modificación
 );
