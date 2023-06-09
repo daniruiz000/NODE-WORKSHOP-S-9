@@ -20,7 +20,7 @@ export const isAuth = async (req: any, res: Response, next: NextFunction): Promi
       throw new Error("No tienes autorización para realizar esta operación");
     }
 
-    req.author = user;
+    req.user = user;
     next();
   } catch (error) {
     res.status(401).json({ error: "No tienes autorización para realizar esta operación" });
