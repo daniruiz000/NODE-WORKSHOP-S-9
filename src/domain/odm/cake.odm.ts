@@ -15,10 +15,6 @@ const getCakeById = async (id: string): Promise<Document<ICake> | null> => {
   return await Cake.findById(id);
 };
 
-const getCakeByName = async (name: string): Promise<Document<ICake>[]> => {
-  return await Cake.find({ name: new RegExp("^" + name.toLowerCase(), "i") });
-};
-
 const createCake = async (cakeData: any): Promise<Document<ICake>> => {
   const cake = new Cake(cakeData);
   const document: Document<ICake> = (await cake.save()) as any;
@@ -38,7 +34,6 @@ export const cakeOdm = {
   getAllCakes,
   getCakeCount,
   getCakeById,
-  getCakeByName,
   createCake,
   deleteCake,
   updateCake,

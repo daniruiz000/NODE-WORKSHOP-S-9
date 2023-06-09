@@ -32,12 +32,41 @@ import mongoose from "mongoose";
 
 // Declaramos nuestro esquema que nos permite declarar nuestros objetos y crearle restricciones.
 const Schema = mongoose.Schema;
+export enum allergensEnum {
+  lactose = "Lactosa",
+  gluten = "Gluten",
+  fructose = "Fructosa",
+  nuts = "Frutos secos",
+  soy = "Soja",
+  shellfish = "Mariscos",
+  fish = "Pescado",
+  eggs = "Huevos",
+  mustard = "Mostaza",
+  sesame = "Sésamo",
+  sulfites = "Sulfitos",
+}
 
+export enum ingredientsCake {
+  HARINA = "Harina",
+  MANTEQUILLA = "Mantequilla",
+  AZUCAR = "Azúcar",
+  HUEVOS = "Huevos",
+  LECHE = "Leche",
+  CREMA = "Crema",
+  LEVADURA = "Levadura",
+  FRUTAS = "Frutas",
+  VAINILLA = "Vainilla",
+  RALLADURA_CITRICOS = "Ralladura de cítricos",
+  ESPECIAS = "Especias",
+  CHOCOLATE = "Chocolate",
+  NUECES = "Nueces",
+  ALMENDRAS = "Almendras",
+}
 // Interface de Cake
 export interface ICake {
   name: string;
-  ingredient: string[];
-  allergens: string[];
+  ingredient: ingredientsCake;
+  allergens: allergensEnum;
   description: string;
   price: number;
 }
@@ -46,8 +75,8 @@ export interface ICake {
 const cakeSchema = new Schema<ICake>(
   {
     name: { type: String, trim: true, minLength: [3, " Al menos tres letras para el nombre"], maxLength: [40, "Nombre demasiado largo, máximo de 20 caracteres"], required: true },
-    ingredient: { type: [String], required: true },
-    allergens: { type: [String], required: true },
+    ingredient: { type: String, required: true },
+    allergens: { type: String, required: true },
     description: { type: String, required: true },
     price: { type: Number, min: [1, "Mínimo 1 página"] },
   },
