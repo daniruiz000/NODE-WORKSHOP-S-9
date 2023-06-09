@@ -87,6 +87,7 @@ export enum ingredientsCake {
   NUECES = "Nueces",
   ALMENDRAS = "Almendras",
 }
+
 // Interface de Cake
 export interface ICake {
   name: string;
@@ -100,10 +101,18 @@ export interface ICake {
 const cakeSchema = new Schema<ICake>(
   {
     name: { type: String, trim: true, minLength: [3, " Al menos tres letras para el nombre"], maxLength: [40, "Nombre demasiado largo, máximo de 20 caracteres"], required: true },
-    ingredient: { type: String, required: true },
-    allergens: { type: String, required: true },
+    ingredient: {
+      type: String, 
+      enum: Object.values(ingredientsCake), // Validar los valores del enum
+      required: true
+    },
+    allergens: {
+      type: String,
+      enum: Object.values(allergensEnum), // Validar los valores del enum
+      required: true
+    },
     description: { type: String, required: true },
-    price: { type: Number, min: [1, "Mínimo 1 página"] },
+    price: { type: Number, min: [0, "Mínimo 0 para precio"] },
   },
   { timestamps: true } // Cada vez que se modifique un documento refleja la hora y fecha de modificación
 );

@@ -47,15 +47,12 @@ import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from "bcrypt";
 
-import { IOrder } from "./order-entity";
-
 const Schema = mongoose.Schema;
 
 export interface IUser {
   email: string;
   password: string;
   name: string;
-  orders?: IOrder[];
 }
 
 const userSchema = new Schema<IUser>(
@@ -79,7 +76,7 @@ const userSchema = new Schema<IUser>(
       required: true
     },
     name: { type: String, trim: true, minLength: [3, "Al menos tres letras para el nombre"], maxLength: [22, "Nombre demasiado largo, máximo de 22 caracteres"], required: true },
-    orders: { type: mongoose.Types.Array, ref: IOrder, required: false }
+
   },
   { timestamps: true } // Cada vez que se modifique un documento refleja la hora y fecha de modificación
 );

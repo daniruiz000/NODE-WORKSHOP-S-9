@@ -51,7 +51,7 @@ export interface IOrder {
   date: Date;
   address: string;
   user: ObjectId;
-  cakes: ObjectId;
+  cakes: ObjectId[];
 }
 
 const orderSchema = new Schema<IOrder>(
