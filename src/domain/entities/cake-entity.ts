@@ -12,20 +12,45 @@
  *        - price
  *      properties:
  *        name:
- *          type: string
- *          description: Nombre de la tarta
- *        ingredient:
- *          type: string
- *          description: Ingredientes que tiene al tarta
- *        allergens:
- *          type: string
- *          description: Alergenos de la tarta
- *        description:
- *          type: string
- *          description: Descripcion de la tarta
- *        price:
- *          type:number
- *          description: Precio de la tarta
+ *         type: string
+ *         minLength: 3
+ *         maxLength: 40
+ *       ingredient:
+ *         type: string
+ *         enum:
+ *           - Harina
+ *           - Mantequilla
+ *           - Azúcar
+ *           - Huevos
+ *           - Leche
+ *           - Crema
+ *           - Levadura
+ *           - Frutas
+ *           - Vainilla
+ *           - Ralladura de cítricos
+ *           - Especias
+ *           - Chocolate
+ *           - Nueces
+ *           - Almendras
+ *       allergens:
+ *         type: string
+ *         enum:
+ *           - Lactosa
+ *           - Gluten
+ *           - Fructosa
+ *           - Frutos secos
+ *           - Soja
+ *           - Mariscos
+ *           - Pescado
+ *           - Huevos
+ *           - Mostaza
+ *           - Sésamo
+ *           - Sulfitos
+ *       description:
+ *         type: string
+ *       price:
+ *         type: number
+ *         minimum: 1
  */
 
 import mongoose from "mongoose";
