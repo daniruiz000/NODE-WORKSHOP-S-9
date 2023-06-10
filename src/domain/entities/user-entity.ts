@@ -8,8 +8,6 @@
  *        - email
  *        - password
  *        - name
- *        - country
- *        - image
  *      properties:
  *        email:
  *          type: string
@@ -24,22 +22,6 @@
  *          minLength: 3
  *          maxLength: 22
  *          description: Nombre del autor
- *        country:
- *          type: string
- *          enum:
- *            - SPAIN
- *            - COLOMBIA
- *            - ENGLAND
- *            - RUSSIA
- *            - UNITED STATES
- *            - ARGENTINA
- *            - CZECHOSLOVAKIA
- *            - JAPAN
- *            - NIGERIA
- *          description: País del autor
- *        image:
- *          type: string
- *          description: URL de la imagen del autor
  */
 
 import mongoose from "mongoose";

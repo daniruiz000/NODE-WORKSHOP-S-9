@@ -16,7 +16,7 @@
  *           minLength: 3
  *           maxLength: 40
  *         ingredients:
- *           type: string
+ *           type: string[]
  *           enum:
  *             - Harina
  *             - Mantequilla
@@ -33,7 +33,7 @@
  *             - Nueces
  *             - Almendras
  *         allergens:
- *           type: string
+ *           type: string[]
  *           enum:
  *             - Lactosa
  *             - Gluten
@@ -50,7 +50,7 @@
  *           type: string
  *         price:
  *           type: number
- *           minimum: 1
+ *           minimum: 0
  */
 
 import mongoose from "mongoose";

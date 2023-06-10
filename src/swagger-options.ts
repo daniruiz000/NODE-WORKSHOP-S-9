@@ -6,15 +6,15 @@ export const swaggerOptions: SwaggerOptions = {
     info: {
       title: "Node S15",
       version: "1.0.0",
-      description: "This is a simple CRUD API",
+      description: "This is a simple CRUD API of Tartichis",
       license: {
         name: "MIT",
         url: "http://mit.com",
       },
       contact: {
-        name: "Fran Linde",
-        url: "https://github.com/franlidebl",
-        email: "fran@example.com"
+        name: "Los Chichos",
+        url: "https://github.com/loschichos",
+        email: "chichos@example.com"
       }
     },
     server: [
