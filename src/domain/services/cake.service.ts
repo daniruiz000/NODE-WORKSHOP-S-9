@@ -1,5 +1,6 @@
 import { type NextFunction, type Request, type Response } from "express";
 import { cakeOdm } from "../odm/cake.odm";
+import fs from "fs";
 
 const getAllCakes = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
@@ -86,10 +87,43 @@ const updateCake = async (req: any, res: Response, next: NextFunction): Promise<
   }
 };
 
+const updateCakeImage = async (req: any, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    // Renombrado de la imagen
+    const originalname = req.file?.originalname as string;
+    const path = req.file?.path as string;
+    const newPath = `${path}_${originalname}`;
+    fs.renameSync(path, newPath);
+
+    // Busqueda de la tarta
+    const cakeId = req.body.cakeId;
+
+    if (req.user.email !== "admin@gmail.com") {
+      res.status(401).json({ error: "No tienes autorización para realizar esta operación" });
+      return;
+    }
+    const cake = cakeOdm.getCakeById(cakeId) as any;
+
+    if (cake) {
+      cake.image = newPath;
+      const cakeUpdated = await cakeOdm.updateCake(cakeId, cake);
+      res.json(cakeUpdated);
+
+      console.log("Tarta modificada correctamente!");
+    } else {
+      fs.unlinkSync(newPath);
+      res.status(404).send("Tarta no encontrada");
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const cakeService = {
   getAllCakes,
   getCakeById,
   createCake,
   deleteCake,
   updateCake,
+  updateCakeImage,
 };
