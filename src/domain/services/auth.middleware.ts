@@ -8,7 +8,7 @@ import {
 
 export const isAuth = async (req: any, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const token = req.headers.userization?.replace("Bearer ", "");
+    const token = req.headers.authorization?.replace("Bearer ", "");
 
     if (!token) {
       throw new Error("No tienes autorización para realizar esta operación");
