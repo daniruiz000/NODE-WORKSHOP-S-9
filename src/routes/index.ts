@@ -36,7 +36,7 @@ export const configureRoutes = (app: any): any => {
   app.use("/user", userRouter);
   app.use("/category", categoryRouter);
   // app.use("/cake", cakeRouter);
-  app.use("/cake", orderRouter);
+  app.use("/order", orderRouter);
   app.use("/public", express.static("public"));
   app.use("/", routerHome);
 
