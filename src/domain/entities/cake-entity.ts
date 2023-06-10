@@ -95,6 +95,7 @@ export interface ICake {
   allergens: allergensEnum[];
   description: string;
   price: number;
+  imageCake?: string;
 }
 
 // Creamos esquema del cake:
@@ -113,6 +114,7 @@ const cakeSchema = new Schema<ICake>(
     },
     description: { type: String, required: true },
     price: { type: Number, min: [0, "Mínimo 0 para precio"] },
+    imageCake: { type: String, required: false },
   },
   { timestamps: true } // Cada vez que se modifique un documento refleja la hora y fecha de modificación
 );
