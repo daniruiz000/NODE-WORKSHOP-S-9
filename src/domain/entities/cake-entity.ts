@@ -1,56 +1,56 @@
 /**
  * @swagger
  * components:
- *  schemas:
- *    Cake:
- *      type: object
- *      required:
- *        - name
- *        - ingredients
- *        - allergens
- *        - description
- *        - price
- *      properties:
- *        name:
- *         type: string
- *         minLength: 3
- *         maxLength: 40
- *       ingredients:
- *         type: string
- *         enum:
- *           - Harina
- *           - Mantequilla
- *           - Azúcar
- *           - Huevos
- *           - Leche
- *           - Crema
- *           - Levadura
- *           - Frutas
- *           - Vainilla
- *           - Ralladura de cítricos
- *           - Especias
- *           - Chocolate
- *           - Nueces
- *           - Almendras
- *       allergens:
- *         type: string
- *         enum:
- *           - Lactosa
- *           - Gluten
- *           - Fructosa
- *           - Frutos secos
- *           - Soja
- *           - Mariscos
- *           - Pescado
- *           - Huevos
- *           - Mostaza
- *           - Sésamo
- *           - Sulfitos
- *       description:
- *         type: string
- *       price:
- *         type: number
- *         minimum: 1
+ *   schemas:
+ *     Cake:
+ *       type: object
+ *       required:
+ *         - name
+ *         - ingredients
+ *         - allergens
+ *         - description
+ *         - price
+ *       properties:
+ *         name:
+ *           type: string
+ *           minLength: 3
+ *           maxLength: 40
+ *         ingredients:
+ *           type: string
+ *           enum:
+ *             - Harina
+ *             - Mantequilla
+ *             - Azúcar
+ *             - Huevos
+ *             - Leche
+ *             - Crema
+ *             - Levadura
+ *             - Frutas
+ *             - Vainilla
+ *             - Ralladura de cítricos
+ *             - Especias
+ *             - Chocolate
+ *             - Nueces
+ *             - Almendras
+ *         allergens:
+ *           type: string
+ *           enum:
+ *             - Lactosa
+ *             - Gluten
+ *             - Fructosa
+ *             - Frutos secos
+ *             - Soja
+ *             - Mariscos
+ *             - Pescado
+ *             - Huevos
+ *             - Mostaza
+ *             - Sésamo
+ *             - Sulfitos
+ *         description:
+ *           type: string
+ *         price:
+ *           type: number
+ *           minimum: 1
  */
 
 import mongoose from "mongoose";
@@ -104,12 +104,12 @@ const cakeSchema = new Schema<ICake>(
     ingredients: {
       type: [String], // Cambiar a tipo string
       enum: Object.values(ingredientsEnum), // Validar los valores del enum
-      required: true
+      required: true,
     },
     allergens: {
       type: [String], // Cambiar a tipo string
       enum: Object.values(allergensEnum), // Validar los valores del enum
-      required: true
+      required: true,
     },
     description: { type: String, required: true },
     price: { type: Number, min: [0, "Mínimo 0 para precio"] },
