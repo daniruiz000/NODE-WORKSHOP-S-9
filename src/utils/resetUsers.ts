@@ -11,6 +11,7 @@ const userList = [
   { name: "Ana Obregón", email: "ana@gmail.com", password: "33333333" },
   { name: "Francisco Bueno", email: "frank@gmail.com", password: "44444444" },
   { name: "Toni Moreno", email: "toni@gmail.com", password: "55555555" },
+  { name: "admin", email: "admin@gmail.com", password: "55555555" },
 ];
 
 //  Función de reseteo de documentos de la colección.
