@@ -81,11 +81,15 @@ export const createOrder = async (req: any, res: Response, next: NextFunction): 
   try {
     const id = req.params.id;
 
-    if (req.order.id !== id && req.order.email !== "admin@gmail.com") {
+    if (req.user.id !== id && req.user.email !== "admin@gmail.com") {
       res.status(401).json({ error: "No tienes autorización para realizar esta operación" });
       return;
     }
-    const createdOrder = await orderOdm.createOrder(req.body);
+    const temporalOrder = {
+      ...req.body,
+      user: req.user.id,
+    };
+    const createdOrder = await orderOdm.createOrder(temporalOrder);
     res.status(201).json(createdOrder);
   } catch (error) {
     next(error);
@@ -96,7 +100,7 @@ export const deleteOrder = async (req: any, res: Response, next: NextFunction): 
   try {
     const id = req.params.id;
 
-    if (req.order.id !== id && req.order.email !== "admin@gmail.com") {
+    if (req.user.id !== id && req.user.email !== "admin@gmail.com") {
       res.status(401).json({ error: "No tienes autorización para realizar esta operación" });
       return;
     }
@@ -116,7 +120,7 @@ export const updateOrder = async (req: any, res: Response, next: NextFunction): 
   try {
     const id = req.params.id;
 
-    if (req.order.id !== id && req.order.email !== "admin@gmail.com") {
+    if (req.user.id !== id && req.user.email !== "admin@gmail.com") {
       res.status(401).json({ error: "No tienes autorización para realizar esta operación" });
       return;
     }
