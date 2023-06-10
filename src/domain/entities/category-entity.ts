@@ -5,41 +5,22 @@
  *    Category:
  *      type: object
  *      required:
- *        - email
- *        - password
  *        - name
- *        - country
- *        - image
+ *        - description
  *      properties:
- *        email:
- *          type: string
- *          format: email
- *          description: Email del autor
- *        password:
- *          type: string
- *          minLength: 8
- *          description: Contraseña del autor
  *        name:
  *          type: string
  *          minLength: 3
  *          maxLength: 22
- *          description: Nombre del autor
- *        country:
+ *          description: Nombre del u
+ *        description:
  *          type: string
- *          enum:
- *            - SPAIN
- *            - COLOMBIA
- *            - ENGLAND
- *            - RUSSIA
- *            - UNITED STATES
- *            - ARGENTINA
- *            - CZECHOSLOVAKIA
- *            - JAPAN
- *            - NIGERIA
- *          description: País del autor
- *        image:
- *          type: string
- *          description: URL de la imagen del autor
+ *          minLength: 3
+ *          maxLength: 50
+ *          description: Descripción de la categoría
+ *        cakes:
+ *          type: string[]
+ *          description: Tartas de la categoría
  */
 
 import mongoose, { ObjectId } from "mongoose";
