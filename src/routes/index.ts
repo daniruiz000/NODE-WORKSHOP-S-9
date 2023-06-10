@@ -6,9 +6,9 @@ import { connect } from "../server/connect.middleware";
 import { userRouter } from "./user.routes";
 import { categoryRouter } from "./category.routes";
 import { orderRouter } from "./order.routes";
-// import { cakeRouter } from "./cake.routes";
 import { infoReq } from "../server/infoReq.middleware";
 import { checkErrorRequest } from "../domain/services/checkErrorRequest.middleware";
+import { cakeRouter } from "./cake.routes";
 
 export const configureRoutes = (app: any): any => {
   // Swagger
@@ -35,7 +35,7 @@ export const configureRoutes = (app: any): any => {
   // Usamos las rutas
   app.use("/user", userRouter);
   app.use("/category", categoryRouter);
-  // app.use("/cake", cakeRouter);
+  app.use("/cake", cakeRouter);
   app.use("/order", orderRouter);
   app.use("/public", express.static("public"));
   app.use("/", routerHome);
