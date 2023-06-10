@@ -12,11 +12,11 @@ const getCategoryCount = async (): Promise<number> => {
 };
 
 const getCategoryById = async (id: string): Promise<Document<ICategory> | null> => {
-  return await Category.findById(id);
+  return await Category.findById(id).populate("cakes");
 };
 
 const getCategoryByName = async (name: string): Promise<Document<ICategory>[]> => {
-  return await Category.find({ name: new RegExp("^" + name.toLowerCase(), "i") });
+  return await Category.find({ name: new RegExp("^" + name.toLowerCase(), "i") }).populate("cakes");
 };
 
 const createCategory = async (categoryData: any): Promise<Document<ICategory>> => {
