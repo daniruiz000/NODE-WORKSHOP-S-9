@@ -6,7 +6,7 @@
  *      type: object
  *      required:
  *        - name
- *        - ingredient
+ *        - ingredients
  *        - allergens
  *        - description
  *        - price
@@ -15,7 +15,7 @@
  *         type: string
  *         minLength: 3
  *         maxLength: 40
- *       ingredient:
+ *       ingredients:
  *         type: string
  *         enum:
  *           - Harina
@@ -71,7 +71,7 @@ export enum allergensEnum {
   sulfites = "Sulfitos",
 }
 
-export enum ingredientsCake {
+export enum ingredientsEnum {
   HARINA = "Harina",
   MANTEQUILLA = "Mantequilla",
   AZUCAR = "Azúcar",
@@ -91,8 +91,8 @@ export enum ingredientsCake {
 // Interface de Cake
 export interface ICake {
   name: string;
-  ingredient: ingredientsCake;
-  allergens: allergensEnum;
+  ingredients: ingredientsEnum[];
+  allergens: allergensEnum[];
   description: string;
   price: number;
 }
@@ -101,15 +101,15 @@ export interface ICake {
 const cakeSchema = new Schema<ICake>(
   {
     name: { type: String, trim: true, minLength: [3, " Al menos tres letras para el nombre"], maxLength: [40, "Nombre demasiado largo, máximo de 20 caracteres"], required: true },
-    ingredient: {
-      type: String,
-      enum: Object.values(ingredientsCake), // Validar los valores del enum
-      required: true,
+    ingredients: {
+      type: [String], // Cambiar a tipo string
+      enum: Object.values(ingredientsEnum), // Validar los valores del enum
+      required: true
     },
     allergens: {
-      type: String,
+      type: [String], // Cambiar a tipo string
       enum: Object.values(allergensEnum), // Validar los valores del enum
-      required: true,
+      required: true
     },
     description: { type: String, required: true },
     price: { type: Number, min: [0, "Mínimo 0 para precio"] },
