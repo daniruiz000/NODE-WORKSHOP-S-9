@@ -9,7 +9,7 @@ export const getUsers = async (req: any, res: Response, next: NextFunction): Pro
   try {
     const page = req.query.page ? parseInt(req.query.page as string) : 1;
     const limit = req.query.limit ? parseInt(req.query.limit as string) : 10;
-
+    console.log(req.user)
     if (req.user.email !== "admin@gmail.com") {
       res.status(401).json({ error: "No tienes autorización para realizar esta operación" });
       return;

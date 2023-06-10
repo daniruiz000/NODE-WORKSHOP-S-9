@@ -4,7 +4,7 @@ export const swaggerOptions: SwaggerOptions = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "Node S15",
+      title: "Tartinchis",
       version: "1.0.0",
       description: "This is a simple CRUD API of Tartichis",
       license: {
@@ -14,16 +14,14 @@ export const swaggerOptions: SwaggerOptions = {
       contact: {
         name: "Los Chichos",
         url: "https://github.com/loschichos",
-        email: "chichos@example.com"
-      }
+        email: "chichos@example.com",
+      },
     },
     server: [
       {
-        url: "http://localhost:3000"
-      }
-    ]
+        url: "http://localhost:3000",
+      },
+    ],
   },
-  apis: [
-    "./src/**/*.ts",
-  ]
+  apis: ["./src/**/*.ts"],
 };
