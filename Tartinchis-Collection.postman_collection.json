@@ -1,0 +1,620 @@
+{
+	"info": {
+		"_postman_id": "31f3e346-3a52-4052-8a24-33aef2f70072",
+		"name": "Tartinchis-Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27147948"
+	},
+	"item": [
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Get orders",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0NWMxOGQ4NGQ3YzNhNmY3NzJkMyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjg2MzkwMzI0LCJleHAiOjE2ODY0NzY3MjR9.SQfjSu8M5a8M4-uHf3pulgJEwn-hzLHH2siV1uUEsM0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/order?page=1&limit=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get order by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0NWMxOGQ4NGQ3YzNhNmY3NzJkMyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjg2MzkwMzI0LCJleHAiOjE2ODY0NzY3MjR9.SQfjSu8M5a8M4-uHf3pulgJEwn-hzLHH2siV1uUEsM0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/order/64679044768bcb9de59204ed",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order",
+								"64679044768bcb9de59204ed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get orders by user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0NWMxOGQ4NGQ3YzNhNmY3NzJkMyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjg2MzkwMzI0LCJleHAiOjE2ODY0NzY3MjR9.SQfjSu8M5a8M4-uHf3pulgJEwn-hzLHH2siV1uUEsM0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/order/user/64679044768bcb9de59204ed",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order",
+								"user",
+								"64679044768bcb9de59204ed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0NWMxOGQ4NGQ3YzNhNmY3NzJkMyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjg2MzkwMzI0LCJleHAiOjE2ODY0NzY3MjR9.SQfjSu8M5a8M4-uHf3pulgJEwn-hzLHH2siV1uUEsM0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"PENDING\",\n    \"date\": \"2023-01-01\",\n    \"address\": \"Calle falsa 123\",\n    \"user\": \"ObjectId\",\n    \"cakes\": [\"64842b7ae54cf3f31291f045\", \"64842b7ae54cf3f31291f047\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/order",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update order",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0NWMxOGQ4NGQ3YzNhNmY3NzJkMyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjg2MzkwMzI0LCJleHAiOjE2ODY0NzY3MjR9.SQfjSu8M5a8M4-uHf3pulgJEwn-hzLHH2siV1uUEsM0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cakes\": [\"64668d212d1464f8ff11af23\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/order/64668d212d1464f8ff11af23",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order",
+								"64668d212d1464f8ff11af23"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0NWMxOGQ4NGQ3YzNhNmY3NzJkMyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjg2MzkwMzI0LCJleHAiOjE2ODY0NzY3MjR9.SQfjSu8M5a8M4-uHf3pulgJEwn-hzLHH2siV1uUEsM0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user?page=1&limit=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0MzEyNTdlMWY5Y2E4ZmE3ZjUzYyIsImVtYWlsIjoidGVzdEBtYWlsLmNvbSIsImlhdCI6MTY4NjM4OTc0OSwiZXhwIjoxNjg2NDc2MTQ5fQ.MmKTnqidqYZwFRY1T07r3IlerohD97VuD6pXMdkHtCk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/64679044768bcb9de59204ed",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"64679044768bcb9de59204ed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search user by name",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0NWMxOGQ4NGQ3YzNhNmY3NzJkMyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjg2MzkwMzI0LCJleHAiOjE2ODY0NzY3MjR9.SQfjSu8M5a8M4-uHf3pulgJEwn-hzLHH2siV1uUEsM0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user/name/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"name",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test@mail.com\",\n    \"password\": \"12345678\",\n    \"name\": \"Prueba\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0NWMxOGQ4NGQ3YzNhNmY3NzJkMyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjg2MzkwMzI0LCJleHAiOjE2ODY0NzY3MjR9.SQfjSu8M5a8M4-uHf3pulgJEwn-hzLHH2siV1uUEsM0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Lucas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/64668d212d1464f8ff11af23",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"64668d212d1464f8ff11af23"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0NWMxOGQ4NGQ3YzNhNmY3NzJkMyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjg2MzkwMzI0LCJleHAiOjE2ODY0NzY3MjR9.SQfjSu8M5a8M4-uHf3pulgJEwn-hzLHH2siV1uUEsM0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/64668d212d1464f8ff11af1f",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"64668d212d1464f8ff11af1f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logo user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0NWMxOGQ4NGQ3YzNhNmY3NzJkMyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjg2MzkwMzI0LCJleHAiOjE2ODY0NzY3MjR9.SQfjSu8M5a8M4-uHf3pulgJEwn-hzLHH2siV1uUEsM0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "logo",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "userId",
+									"value": "64679044768bcb9de59204f1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/user/logo-upload",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"logo-upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "email",
+								"value": "jane@gmail.com",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "password",
+								"value": "87654321",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@gmail.com\",\n    \"password\": \"55555555\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cakes",
+			"item": [
+				{
+					"name": "Get cakes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0NWMxOGQ4NGQ3YzNhNmY3NzJkMyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjg2MzkwMzI0LCJleHAiOjE2ODY0NzY3MjR9.SQfjSu8M5a8M4-uHf3pulgJEwn-hzLHH2siV1uUEsM0",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/cake?page=1&limit=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cake"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get cake by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0MzEyNTdlMWY5Y2E4ZmE3ZjUzYyIsImVtYWlsIjoidGVzdEBtYWlsLmNvbSIsImlhdCI6MTY4NjM4OTc0OSwiZXhwIjoxNjg2NDc2MTQ5fQ.MmKTnqidqYZwFRY1T07r3IlerohD97VuD6pXMdkHtCk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/cake/648445c28d84d7c3a6f772df",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cake",
+								"648445c28d84d7c3a6f772df"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create cake",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0NWMxOGQ4NGQ3YzNhNmY3NzJkMyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjg2MzkwMzI0LCJleHAiOjE2ODY0NzY3MjR9.SQfjSu8M5a8M4-uHf3pulgJEwn-hzLHH2siV1uUEsM0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Strawberry Cheese Cake\",\n    \"ingredients\": [\"Harina\", \"Mantequilla\", \"Azúcar\", \"Leche\", \"Crema\", \"Frutas\", \"Vainilla\"],\n    \"allergens\": [\"Lactosa\", \"Gluten\", \"Fructosa\"],\n    \"description\": \"Tarta de queso fresco, sin horno\",\n    \"price\": 12,\n    \"imageCake\": \"string\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/cake",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cake"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update cake",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JJZCI6IjY0NjY4ZDIxMmQxNDY0ZjhmZjExYWYyMyIsImF1dGhvckVtYWlsIjoiZXJueUBnbWFpbC5jb20iLCJpYXQiOjE2ODQ0NDI5MjMsImV4cCI6MTY4NDUyOTMyM30.xTqNoqdj6N-PJJbuXy6IJlIKMlxJ4o6oPVF4eDr7AZk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Carrot Cake\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/cake/648445c28d84d7c3a6f772df",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cake",
+								"648445c28d84d7c3a6f772df"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete cake",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0NWMxOGQ4NGQ3YzNhNmY3NzJkMyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjg2MzkwMzI0LCJleHAiOjE2ODY0NzY3MjR9.SQfjSu8M5a8M4-uHf3pulgJEwn-hzLHH2siV1uUEsM0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/cake/648445c28d84d7c3a6f772df",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cake",
+								"648445c28d84d7c3a6f772df"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cake image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0NWMxOGQ4NGQ3YzNhNmY3NzJkMyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjg2MzkwMzI0LCJleHAiOjE2ODY0NzY3MjR9.SQfjSu8M5a8M4-uHf3pulgJEwn-hzLHH2siV1uUEsM0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "logo",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "userId",
+									"value": "64679044768bcb9de59204f1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/cake/limage-upload",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cake",
+								"limage-upload"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
