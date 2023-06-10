@@ -1,28 +1,28 @@
 /**
  * @swagger
  * tags:
- *   name: Book
- *   description: The books managing API
+ *   name: Cake
+ *   description: The cake managing API
  */
 
 import express from "express";
-import { bookService } from "../domain/services/book.service";
+import { cakeService } from "../domain/services/cake.service";
 import { checkParams } from "../domain/services/checkParams.middleware";
 
-export const bookRouter = express.Router();
+export const cakeRouter = express.Router();
 
-bookRouter.get("/", checkParams, bookService.getAllBooks);
-bookRouter.get("/:id", bookService.getBookById);
-bookRouter.post("/", bookService.createBook);
-bookRouter.delete("/:id", bookService.deleteBook);
-bookRouter.put("/:id", bookService.updateBook);
+cakeRouter.get("/", checkParams, cakeService.getAllCakes);
+cakeRouter.get("/:id", cakeService.getCakeById);
+cakeRouter.post("/", cakeService.createCake);
+cakeRouter.delete("/:id", cakeService.deleteCake);
+cakeRouter.put("/:id", cakeService.updateCake);
 
 /**
  * @swagger
- * /book:
+ * /cake:
  *   get:
- *     summary: Lists all the books
- *     tags: [Book]
+ *     summary: Lists all the cakes
+ *     tags: [Cake]
  *     parameters:
  *       - in: query
  *         name: page
@@ -36,7 +36,7 @@ bookRouter.put("/:id", bookService.updateBook);
  *         description: The number of items to return
  *     responses:
  *       200:
- *         description: The list of the books
+ *         description: The list of the cakes
  *         content:
  *           application/json:
  *             schema:
@@ -45,7 +45,7 @@ bookRouter.put("/:id", bookService.updateBook);
  *                 data:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Book'
+ *                     $ref: '#/components/schemas/Cake'
  *                   pagination:
  *                     $ref: '#/components/schemas/Pagination'
  *       400:
@@ -58,26 +58,26 @@ bookRouter.put("/:id", bookService.updateBook);
 
 /**
  * @swagger
- * /book/{id}:
+ * /cake/{id}:
  *   get:
- *     summary: Get a book by ID
- *     tags: [Book]
+ *     summary: Get a cake by ID
+ *     tags: [Cake]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The book ID
+ *         description: The cake ID
  *     responses:
  *       200:
- *         description: The book info
+ *         description: The cake info
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Book'
+ *               $ref: '#/components/schemas/Cake'
  *       404:
- *         description: Book not found
+ *         description: Cake not found
  *         content:
  *           application/json:
  *             schema:
@@ -86,23 +86,23 @@ bookRouter.put("/:id", bookService.updateBook);
 
 /**
  * @swagger
- * /book:
+ * /cake:
  *   post:
- *     summary: Create a new book
- *     tags: [Book]
+ *     summary: Create a new cake
+ *     tags: [Cake]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Book'
+ *             $ref: '#/components/schemas/Cake'
  *     responses:
  *       201:
- *         description: The book was created
+ *         description: The cake was created
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Book'
+ *               $ref: '#/components/schemas/Cake'
  *       400:
  *         description: Missing parameters or validation error
  *         content:
@@ -113,26 +113,26 @@ bookRouter.put("/:id", bookService.updateBook);
 
 /**
  * @swagger
- * /book/{id}:
+ * /cake/{id}:
  *   delete:
- *     summary: Delete a book by ID
- *     tags: [Book]
+ *     summary: Delete a cake by ID
+ *     tags: [Cake]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The book ID
+ *         description: The cake ID
  *     responses:
  *       200:
- *         description: The book was successfully deleted
+ *         description: The cake was successfully deleted
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Book'
+ *               $ref: '#/components/schemas/Cake'
  *       404:
- *         description: The book was not found
+ *         description: The cake was not found
  *         content:
  *           application/json:
  *             schema:
@@ -141,30 +141,30 @@ bookRouter.put("/:id", bookService.updateBook);
 
 /**
  * @swagger
- * /book/{id}:
+ * /cake/{id}:
  *   put:
- *     summary: Update a book by ID
- *     tags: [Book]
+ *     summary: Update a cake by ID
+ *     tags: [Cake]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The book ID
+ *         description: The cake ID
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Book'
+ *             $ref: '#/components/schemas/Cake'
  *     responses:
  *       200:
- *         description: The book was successfully updated
+ *         description: The cake was successfully updated
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Book'
+ *               $ref: '#/components/schemas/Cake'
  *       400:
  *         description: Some parameters are missing or invalid
  *         content:
@@ -172,7 +172,7 @@ bookRouter.put("/:id", bookService.updateBook);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  *       404:
- *         description: The book was not found
+ *         description: The cake was not found
  *         content:
  *           application/json:
  *             schema:
