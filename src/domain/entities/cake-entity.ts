@@ -32,6 +32,10 @@
  *             - Chocolate
  *             - Nueces
  *             - Almendras
+ *             - Zanahoria
+ *             - Queso
+ *             - Limones
+ *             - Fresas
  *         allergens:
  *           type: string[]
  *           enum:
@@ -86,6 +90,10 @@ export enum ingredientsEnum {
   CHOCOLATE = "Chocolate",
   NUECES = "Nueces",
   ALMENDRAS = "Almendras",
+  ZANAHORIA = "Zanahoria",
+  QUESO = "Queso",
+  LIMONES = "Limones",
+  FRESAS = "Fresas",
 }
 
 // Interface de Cake
