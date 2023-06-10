@@ -36,6 +36,12 @@
  *             - Queso
  *             - Limones
  *             - Fresas
+ *             - Café
+ *             - Pistacho
+ *             - Caramelo
+ *             - Maracuyá
+ *             - Coco
+ *             - Moras
  *         allergens:
  *           type: string[]
  *           enum:
@@ -94,6 +100,12 @@ export enum ingredientsEnum {
   QUESO = "Queso",
   LIMONES = "Limones",
   FRESAS = "Fresas",
+  CAFE = "Café",
+  PISTACHO = "Pistacho",
+  CARAMELO = "Caramelo",
+  MARACUYA = "Maracuyá",
+  COCO = "Coco",
+  MORAS = "Moras",
 }
 
 // Interface de Cake
