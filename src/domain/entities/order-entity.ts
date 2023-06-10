@@ -40,6 +40,7 @@ import mongoose, { ObjectId } from "mongoose";
 const Schema = mongoose.Schema;
 
 export enum AllowedStatus {
+  CART = "CART",
   PENDING = "PENDING",
   PAID = "PAID",
   SENT = "SENT",
@@ -49,7 +50,7 @@ export enum AllowedStatus {
 export interface IOrder {
   status: AllowedStatus;
   date: Date;
-  address: string;
+  address?: string;
   user: ObjectId;
   cakes: ObjectId[];
 }
@@ -61,7 +62,7 @@ const orderSchema = new Schema<IOrder>(
       trim: true,
       minLength: [3, "Al menos tres letras para la dirección"],
       maxLength: [100, "Dirección demasiada larga, máximo de 100 caracteres"],
-      required: true,
+      required: false,
     },
     status: {
       type: String,
