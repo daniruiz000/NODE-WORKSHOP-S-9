@@ -8,14 +8,15 @@
 import express from "express";
 import { cakeService } from "../domain/services/cake.service";
 import { checkParams } from "../domain/services/checkParams.middleware";
+import { isAuth } from "../domain/services/auth.middleware";
 
 export const cakeRouter = express.Router();
 
 cakeRouter.get("/", checkParams, cakeService.getAllCakes);
 cakeRouter.get("/:id", cakeService.getCakeById);
-cakeRouter.post("/", cakeService.createCake);
-cakeRouter.delete("/:id", cakeService.deleteCake);
-cakeRouter.put("/:id", cakeService.updateCake);
+cakeRouter.post("/", isAuth, cakeService.createCake);
+cakeRouter.delete("/:id", isAuth, cakeService.deleteCake);
+cakeRouter.put("/:id", isAuth, cakeService.updateCake);
 
 /**
  * @swagger
