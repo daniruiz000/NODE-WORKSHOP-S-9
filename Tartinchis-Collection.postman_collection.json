@@ -417,6 +417,203 @@
 			]
 		},
 		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Get categories",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0NWMxOGQ4NGQ3YzNhNmY3NzJkMyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjg2MzkwMzI0LCJleHAiOjE2ODY0NzY3MjR9.SQfjSu8M5a8M4-uHf3pulgJEwn-hzLHH2siV1uUEsM0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/category?page=1&limit=10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"category"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get category by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0MzEyNTdlMWY5Y2E4ZmE3ZjUzYyIsImVtYWlsIjoidGVzdEBtYWlsLmNvbSIsImlhdCI6MTY4NjM4OTc0OSwiZXhwIjoxNjg2NDc2MTQ5fQ.MmKTnqidqYZwFRY1T07r3IlerohD97VuD6pXMdkHtCk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/category/648445c28d84d7c3a6f77300",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"category",
+								"648445c28d84d7c3a6f77300"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search category by name",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0NWMxOGQ4NGQ3YzNhNmY3NzJkMyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjg2MzkwMzI0LCJleHAiOjE2ODY0NzY3MjR9.SQfjSu8M5a8M4-uHf3pulgJEwn-hzLHH2siV1uUEsM0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/category/name/Clásicas",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"category",
+								"name",
+								"Clásicas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0NWMxOGQ4NGQ3YzNhNmY3NzJkMyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjg2MzkwMzI0LCJleHAiOjE2ODY0NzY3MjR9.SQfjSu8M5a8M4-uHf3pulgJEwn-hzLHH2siV1uUEsM0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Las favoritas de Fran\",\n    \"description\": \"Yo que sé, preguntále a él...\",\n    \"cakes\": [\"648445c28d84d7c3a6f772e2\", \"648445c28d84d7c3a6f772e4\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/category",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update category",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0NWMxOGQ4NGQ3YzNhNmY3NzJkMyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjg2MzkwMzI0LCJleHAiOjE2ODY0NzY3MjR9.SQfjSu8M5a8M4-uHf3pulgJEwn-hzLHH2siV1uUEsM0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Lucas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/category/648445c28d84d7c3a6f77300?Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0NWMxOGQ4NGQ3YzNhNmY3NzJkMyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjg2MzkwMzI0LCJleHAiOjE2ODY0NzY3MjR9.SQfjSu8M5a8M4-uHf3pulgJEwn-hzLHH2siV1uUEsM0",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"category",
+								"648445c28d84d7c3a6f77300"
+							],
+							"query": [
+								{
+									"key": "Authorization",
+									"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0NWMxOGQ4NGQ3YzNhNmY3NzJkMyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjg2MzkwMzI0LCJleHAiOjE2ODY0NzY3MjR9.SQfjSu8M5a8M4-uHf3pulgJEwn-hzLHH2siV1uUEsM0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete category",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0NWMxOGQ4NGQ3YzNhNmY3NzJkMyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjg2MzkwMzI0LCJleHAiOjE2ODY0NzY3MjR9.SQfjSu8M5a8M4-uHf3pulgJEwn-hzLHH2siV1uUEsM0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/category/648445c28d84d7c3a6f77300?Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0NWMxOGQ4NGQ3YzNhNmY3NzJkMyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjg2MzkwMzI0LCJleHAiOjE2ODY0NzY3MjR9.SQfjSu8M5a8M4-uHf3pulgJEwn-hzLHH2siV1uUEsM0",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"category",
+								"648445c28d84d7c3a6f77300"
+							],
+							"query": [
+								{
+									"key": "Authorization",
+									"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0NWMxOGQ4NGQ3YzNhNmY3NzJkMyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjg2MzkwMzI0LCJleHAiOjE2ODY0NzY3MjR9.SQfjSu8M5a8M4-uHf3pulgJEwn-hzLHH2siV1uUEsM0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Cakes",
 			"item": [
 				{
@@ -516,7 +713,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JJZCI6IjY0NjY4ZDIxMmQxNDY0ZjhmZjExYWYyMyIsImF1dGhvckVtYWlsIjoiZXJueUBnbWFpbC5jb20iLCJpYXQiOjE2ODQ0NDI5MjMsImV4cCI6MTY4NDUyOTMyM30.xTqNoqdj6N-PJJbuXy6IJlIKMlxJ4o6oPVF4eDr7AZk",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQ0NWMxOGQ4NGQ3YzNhNmY3NzJkMyIsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwiaWF0IjoxNjg2MzkwMzI0LCJleHAiOjE2ODY0NzY3MjR9.SQfjSu8M5a8M4-uHf3pulgJEwn-hzLHH2siV1uUEsM0",
 								"type": "text"
 							}
 						],
