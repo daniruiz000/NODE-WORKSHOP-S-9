@@ -6,10 +6,12 @@
  */
 
 import express from "express";
+import multer from "multer";
 import { cakeService } from "../domain/services/cake.service";
 import { checkParams } from "../domain/services/checkParams.middleware";
 import { isAuth } from "../domain/services/auth.middleware";
 
+const upload = multer({ dest: "public" });
 export const cakeRouter = express.Router();
 
 cakeRouter.get("/", checkParams, cakeService.getAllCakes);
@@ -17,6 +19,7 @@ cakeRouter.get("/:id", cakeService.getCakeById);
 cakeRouter.post("/", isAuth, cakeService.createCake);
 cakeRouter.delete("/:id", isAuth, cakeService.deleteCake);
 cakeRouter.put("/:id", isAuth, cakeService.updateCake);
+cakeRouter.post("/image-upload", isAuth, upload.single("image"), cakeService.updateCakeImage);
 
 /**
  * @swagger
@@ -178,4 +181,28 @@ cakeRouter.put("/:id", isAuth, cakeService.updateCake);
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Error'
+ */
+
+/**
+ * @swagger
+ * /cake/image-upload:
+ *   post:
+ *     summary: Upload a image for a cake
+ *     tags: [Cake]
+ *     consumes:
+ *       - multipart/form-data
+ *     parameters:
+ *       - in: formData
+ *         name: image
+ *         type: file
+ *         description: The file to upload.
+ *       - in: formData
+ *         name: cakeId
+ *         type: string
+ *         description: The id of the cake
+ *     responses:
+ *       200:
+ *         description: The image was uploaded successfully
+ *       404:
+ *         description: The cake was not found
  */
