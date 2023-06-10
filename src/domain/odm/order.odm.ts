@@ -3,6 +3,7 @@ import { Document } from "mongoose";
 
 const getAllOrdersByUser = async (id: string, page: number, limit: number): Promise<any> => {
   return await Order.find({ user: id })
+    .populate("user", "cakes")
     .limit(limit)
     .skip((page - 1) * limit);
 };
@@ -18,7 +19,7 @@ const getOrderCount = async (): Promise<number> => {
 };
 
 const getOrderById = async (id: string): Promise<Document<IOrder> | null> => {
-  return await Order.findById(id);
+  return await Order.findById(id).populate("user", "cakes");
 };
 
 const createOrder = async (orderData: any): Promise<Document<IOrder>> => {
