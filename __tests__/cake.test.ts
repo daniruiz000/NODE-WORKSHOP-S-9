@@ -63,11 +63,12 @@ describe("Cake Controler", () => {
 
   it("POST /cake = this should create a cake", async () => {
     const response = await request(app).post("/cake").send(cakeMock).set("Authorization", `Bearer ${token}`).expect(201);
-    expect(response.body._id).toBe(cakeId);
+    expect(response.body.name).toBe(cakeMock.name);
+    cakeId = response.body._id
   });
 
   it("GET /cake returns a list with the cakes", async () => {
-    const response = await request(app).get("/cake").send(cakeMock).expect(200);
+    const response = await request(app).get("/cake").expect(200);
     expect(response.body.data).toBeDefined(); // Esperamos que data este definido en la respuesta
     expect(response.body.data).toHaveLength(1); // Esperamos que data tenga un elemento
   });
@@ -91,7 +92,7 @@ describe("Cake Controler", () => {
     expect(response.body.error).toBe("No tienes autorización para realizar esta operación");
   });
   it("DELETE /cake/id Delete cake when token is ok", async () => {
-    const response = await request(app).delete(`/cake/${cakeId}`).set("Authorization", `Bearer ${token}`).expect(201);
+    const response = await request(app).delete(`/cake/${cakeId}`).set("Authorization", `Bearer ${token}`).expect(200);
     expect(response.body._id).toBe(cakeId);
   });
 });
