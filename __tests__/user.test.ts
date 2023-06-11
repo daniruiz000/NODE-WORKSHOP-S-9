@@ -2,25 +2,29 @@ import mongoose from "mongoose"
 import { mongoConnect } from "../src/domain/repositories/mongo-repository"
 import { app } from "../src/server/index"
 import { appInstance } from "../src/index"
-import { type IAuthor, Author, AllowedCountries } from "../src/domain/entities/author-entity"
+import { type IUser, User } from "../src/domain/entities/user-entity"
 import request from "supertest"
 // Tenemos que tener una BBDD especifica de test.
 
-describe("Author Controler", () => {
-  const authorMoc: IAuthor = {
+describe("User Controler", () => {
+  const userMoc: IUser = {
     email: "dan@gmail.com",
     password: "123456789",
     name: "Dani",
-    country: AllowedCountries.SPAIN,
   }
+  // const adminMoc: IUser = {
+  //   email: "admin@gmail.com",
+  //   password: "55555555",
+  //   name: "admin",
+  // }
 
   let token: string
-  let authorId: string
+  let userId: string
 
   // Antes de hacer los tests:
   beforeAll(async () => {
     await mongoConnect() // Conecto a mongo pero a la BBDD de test mediante la biblioteca cross-env que nos permite modificar la variable de entorno del nombre de la BBDD desde el script de test.
-    await Author.collection.drop() // Borramos los usuarios de la BBDD
+    await User.collection.drop() // Borramos los usuarios de la BBDD
   })
   // Cuando acaben los test:
   afterAll(async () => {
@@ -28,24 +32,24 @@ describe("Author Controler", () => {
     appInstance.close()
   })
 
-  it("POST /author = this should create an author", async() => {
+  it("POST /user = this should create an user", async() => {
     const response = await request(app)
-      .post("/author")
-      .send(authorMoc)
+      .post("/user")
+      .send(userMoc)
       .set("Accept", "application/json")
       .expect(201)
 
     expect(response.body).toHaveProperty("_id")
-    expect(response.body.email).toBe(authorMoc.email)
-    authorId = response.body._id
+    expect(response.body.email).toBe(userMoc.email)
+    userId = response.body._id
   })
-  it("POST /author/login with valide credentials return 200 and token", async () => {
+  it("POST /user/login with valide credentials return 200 and token", async () => {
     const credentials = {
-      email: authorMoc.email,
-      password: authorMoc.password
+      email: userMoc.email,
+      password: userMoc.password
     }
     const response = await request(app)
-      .post("/author/login")
+      .post("/user/login")
       .send(credentials)
       .expect(200)
 
@@ -53,64 +57,60 @@ describe("Author Controler", () => {
     token = response.body.token
     console.log(token)
   })
-  it("POST /author/login with wrong credentials return 401 and no token", async () => {
+  it("POST /user/login with wrong credentials return 401 and no token", async () => {
     const credentials = {
       email: "noexistingemail",
       password: "123"
     }
     const response = await request(app)
-      .post("/author/login")
+      .post("/user/login")
       .send(credentials)
       .expect(401)
 
     expect(response.body.token).toBeUndefined()
   })
-  it("GET /author returns a list with the authors", async () => {
+  it("GET /user/id returns a user by id", async () => {
     const response = await request(app)
-      .get("/author")
+      .put(`/user/${userId}`)
+      .set("Authorization", `Bearer ${token}`)
       .expect(200)
-    expect(response.body.data).toBeDefined() // Esperamos que data este definido en la respuesta
-    expect(response.body.data.length).toBe(1)
-    expect(response.body.data[0].email).toBe(authorMoc.email)
-    expect(response.body.totalItems).toBe(1)
-    expect(response.body.totalPages).toBe(1)
-    expect(response.body.currentPage).toBe(1)
+    expect(response.body.email).toBe(userMoc.email)
     console.log(response.body)
   })
-  it("PUT /author/id Modify author when token is send", async () => {
+  it("PUT /user/id Modify user when token is send", async () => {
     const updatedData = {
       name: "Edu",
     }
     const response = await request(app)
-      .put(`/author/${authorId}`)
+      .put(`/user/${userId}`)
       .set("Authorization", `Bearer ${token}`)
       .send(updatedData)
       .expect(200)
     expect(response.body.name).toBe(updatedData.name)
-    expect(response.body.email).toBe(authorMoc.email)
-    expect(response.body._id).toBe(authorId)
+    expect(response.body.email).toBe(userMoc.email)
+    expect(response.body._id).toBe(userId)
   })
-  it("PUT /author/id Should not modify author when no token is present", async () => {
+  it("PUT /user/id Should not modify user when no token is present", async () => {
     const updatedData = {
-      country: AllowedCountries.COLOMBIA,
+      name: "invented",
     }
     const response = await request(app)
-      .put(`/author/${authorId}`)
+      .put(`/user/${userId}`)
       .send(updatedData)
       .expect(401)
     expect(response.body.error).toBe("No tienes autorización para realizar esta operación")
   })
-  it("DELET /author/id Do not delete author when token does not exist", async () => {
+  it("DELET /user/id Do not delete user when token does not exist", async () => {
     const response = await request(app)
-      .delete(`/author/${authorId}`)
+      .delete(`/user/${userId}`)
       .expect(401)
     expect(response.body.error).toBe("No tienes autorización para realizar esta operación")
   })
-  it("DELET /author/id Delete author when token is ok", async () => {
+  it("DELET /user/id Delete user when token is ok", async () => {
     const response = await request(app)
-      .delete(`/author/${authorId}`)
+      .delete(`/user/${userId}`)
       .set("Authorization", `Bearer ${token}`)
       .expect(200)
-    expect(response.body._id).toBe(authorId)
+    expect(response.body._id).toBe(userId)
   })
 })
