@@ -2,14 +2,12 @@
  * @swagger
  * components:
  *  schemas:
- *    Author:
+ *    User:
  *      type: object
  *      required:
  *        - email
  *        - password
  *        - name
- *        - country
- *        - image
  *      properties:
  *        email:
  *          type: string
@@ -24,22 +22,6 @@
  *          minLength: 3
  *          maxLength: 22
  *          description: Nombre del autor
- *        country:
- *          type: string
- *          enum:
- *            - SPAIN
- *            - COLOMBIA
- *            - ENGLAND
- *            - RUSSIA
- *            - UNITED STATES
- *            - ARGENTINA
- *            - CZECHOSLOVAKIA
- *            - JAPAN
- *            - NIGERIA
- *          description: País del autor
- *        image:
- *          type: string
- *          description: URL de la imagen del autor
  */
 
 import mongoose from "mongoose";
@@ -47,32 +29,15 @@ import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from "bcrypt";
 
-import { type IBook } from "./book-entity";
-
 const Schema = mongoose.Schema;
 
-export enum AllowedCountries {
-  SPAIN = "SPAIN",
-  COLOMBIA = "COLOMBIA",
-  ENGLAND = "ENGLAND",
-  RUSSIA = "RUSSIA",
-  UNITED_STATES = "UNITED STATES",
-  ARGENTINA = "ARGENTINA",
-  CZECHOSLOVAKIA = "CZECHOSLOVAKIA",
-  JAPAN = "JAPAN",
-  NIGERIA = "NIGERIA",
-}
-
-export interface IAuthor {
+export interface IUser {
   email: string;
   password: string;
   name: string;
-  country: AllowedCountries;
-  image?: string;
-  books?: IBook[];
 }
 
-const authorSchema = new Schema<IAuthor>(
+const userSchema = new Schema<IUser>(
   {
     email: {
       type: String,
@@ -93,14 +58,13 @@ const authorSchema = new Schema<IAuthor>(
       required: true
     },
     name: { type: String, trim: true, minLength: [3, "Al menos tres letras para el nombre"], maxLength: [22, "Nombre demasiado largo, máximo de 22 caracteres"], required: true },
-    country: { type: String, trim: true, minLength: [3, "Al menos tres letras para el país"], maxLength: [20, "País demasiado largo, máximo de 20 caracteres"], enum: AllowedCountries, uppercase: true, required: true },
-    image: { type: String, required: false }
+
   },
   { timestamps: true } // Cada vez que se modifique un documento refleja la hora y fecha de modificación
 );
 
 // Cada vez que se guarde un usuario encriptamos la contraseña
-authorSchema.pre("save", async function (next) {
+userSchema.pre("save", async function (next) {
   try {
     // Si la password estaba encriptada, no la encriptaremos de nuevo.
     if (this.isModified("password")) {
@@ -115,5 +79,5 @@ authorSchema.pre("save", async function (next) {
   }
 });
 
-// Creamos un modelo para que siempre que creamos un author valide contra el Schema que hemos creado para ver si es valido.
-export const Author = mongoose.model<IAuthor>("Author", authorSchema);
+// Creamos un modelo para que siempre que creamos un user valide contra el Schema que hemos creado para ver si es valido.
+export const User = mongoose.model<IUser>("User", userSchema);

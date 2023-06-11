@@ -1,35 +1,31 @@
 import express from "express";
-import multer from "multer";
+
 import { isAuth } from "../domain/services/auth.middleware";
-import { authorService } from "../domain/services/author.service";
+import { categoryService } from "../domain/services/category.service";
 import { checkParams } from "../domain/services/checkParams.middleware";
 
-const upload = multer({ dest: "public" });
+export const categoryRouter = express.Router();
 
-export const authorRouter = express.Router();
-
-authorRouter.get("/", checkParams, authorService.getAuthors);
-authorRouter.get("/:id", authorService.getAuthorById);
-authorRouter.get("/name/:name", authorService.getAuthorByName);
-authorRouter.post("/", authorService.createAuthor);
-authorRouter.delete("/:id", isAuth, authorService.deleteAuthor);
-authorRouter.put("/:id", isAuth, authorService.updateAuthor);
-authorRouter.post("/login", authorService.login);
-authorRouter.post("/image-upload", isAuth, upload.single("image"), authorService.updateAuthorImage);
+categoryRouter.get("/", checkParams, categoryService.getAllCategories);
+categoryRouter.get("/:id", categoryService.getCategoryById);
+categoryRouter.get("/name/:name", categoryService.getCategoryByName);
+categoryRouter.post("/", isAuth, categoryService.createCategory);
+categoryRouter.delete("/:id", isAuth, categoryService.deleteCategory);
+categoryRouter.put("/:id", isAuth, categoryService.updateCategory);
 
 /**
  * @swagger
  * tags:
- *   name: Author
- *   description: API for managing authors
+ *   name: Category
+ *   description: API for managing categorys
  */
 
 /**
  * @swagger
- * /author:
+ * /category:
  *   get:
- *     summary: Get all authors
- *     tags: [Author]
+ *     summary: Get all categorys
+ *     tags: [Category]
  *     parameters:
  *       - in: query
  *         name: page
@@ -43,7 +39,7 @@ authorRouter.post("/image-upload", isAuth, upload.single("image"), authorService
  *         description: The number of items to return
  *     responses:
  *       200:
- *         description: The list of authors
+ *         description: The list of categorys
  *         content:
  *           application/json:
  *             schema:
@@ -52,7 +48,7 @@ authorRouter.post("/image-upload", isAuth, upload.single("image"), authorService
  *                 data:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Author'
+ *                     $ref: '#/components/schemas/Category'
  *                   pagination:
  *                     $ref: '#/components/schemas/Pagination'
  *       400:
@@ -65,26 +61,26 @@ authorRouter.post("/image-upload", isAuth, upload.single("image"), authorService
 
 /**
  * @swagger
- * /author/{id}:
+ * /category/{id}:
  *   get:
- *     summary: Get an author by ID
- *     tags: [Author]
+ *     summary: Get an category by ID
+ *     tags: [Category]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The author ID
+ *         description: The category ID
  *     responses:
  *       200:
- *         description: The author info
+ *         description: The category info
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Author'
+ *               $ref: '#/components/schemas/Category'
  *       404:
- *         description: Author not found
+ *         description: Category not found
  *         content:
  *           application/json:
  *             schema:
@@ -93,26 +89,26 @@ authorRouter.post("/image-upload", isAuth, upload.single("image"), authorService
 
 /**
  * @swagger
- * /author/name/{name}:
+ * /category/name/{name}:
  *   get:
- *     summary: Get an author by name
- *     tags: [Author]
+ *     summary: Get an category by name
+ *     tags: [Category]
  *     parameters:
  *       - in: path
  *         name: name
  *         schema:
  *           type: string
  *         required: true
- *         description: The author name
+ *         description: The category name
  *     responses:
  *       200:
- *         description: The author info
+ *         description: The category info
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Author'
+ *               $ref: '#/components/schemas/Category'
  *       404:
- *         description: Author not found
+ *         description: Category not found
  *         content:
  *           application/json:
  *             schema:
@@ -121,47 +117,47 @@ authorRouter.post("/image-upload", isAuth, upload.single("image"), authorService
 
 /**
  * @swagger
- * /author:
+ * /category:
  *   post:
- *     summary: Create a new author
- *     tags: [Author]
+ *     summary: Create a new category
+ *     tags: [Category]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Author'
+ *             $ref: '#/components/schemas/Category'
  *     responses:
  *       201:
- *         description: The author was created
+ *         description: The category was created
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Author'
+ *               $ref: '#/components/schemas/Category'
  */
 
 /**
  * @swagger
- * /author/{id}:
+ * /category/{id}:
  *   delete:
- *     summary: Delete an author by ID
- *     tags: [Author]
+ *     summary: Delete an category by ID
+ *     tags: [Category]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The author ID
+ *         description: The category ID
  *     responses:
  *       200:
- *         description: The author was successfully deleted
+ *         description: The category was successfully deleted
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Author'
+ *               $ref: '#/components/schemas/Category'
  *       404:
- *         description: The author was not found
+ *         description: The category was not found
  *         content:
  *           application/json:
  *             schema:
@@ -170,30 +166,30 @@ authorRouter.post("/image-upload", isAuth, upload.single("image"), authorService
 
 /**
  * @swagger
- * /author/{id}:
+ * /category/{id}:
  *   put:
- *     summary: Update an author by ID
- *     tags: [Author]
+ *     summary: Update an category by ID
+ *     tags: [Category]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The author ID
+ *         description: The category ID
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Author'
+ *             $ref: '#/components/schemas/Category'
  *     responses:
  *       200:
- *         description: The author was successfully updated
+ *         description: The category was successfully updated
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Author'
+ *               $ref: '#/components/schemas/Category'
  *       400:
  *         description: Some parameters are missing or invalid
  *         content:
@@ -201,7 +197,7 @@ authorRouter.post("/image-upload", isAuth, upload.single("image"), authorService
  *             schema:
  *               $ref: '#/components/schemas/Error'
  *       404:
- *         description: The author was not found
+ *         description: The category was not found
  *         content:
  *           application/json:
  *             schema:
@@ -210,10 +206,10 @@ authorRouter.post("/image-upload", isAuth, upload.single("image"), authorService
 
 /**
  * @swagger
- * /author/login:
+ * /category/login:
  *   post:
- *     summary: Login as an author
- *     tags: [Author]
+ *     summary: Login as an category
+ *     tags: [Category]
  *     requestBody:
  *       required: true
  *       content:
@@ -226,7 +222,7 @@ authorRouter.post("/image-upload", isAuth, upload.single("image"), authorService
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Author'
+ *               $ref: '#/components/schemas/Category'
  *       401:
  *         description: Invalid credentials
  *         content:
@@ -237,10 +233,10 @@ authorRouter.post("/image-upload", isAuth, upload.single("image"), authorService
 
 /**
  * @swagger
- * /author/image-upload:
+ * /category/image-upload:
  *   post:
- *     summary: Upload a image for a author
- *     tags: [Author]
+ *     summary: Upload a image for a category
+ *     tags: [Category]
  *     consumes:
  *       - multipart/form-data
  *     parameters:
@@ -249,12 +245,12 @@ authorRouter.post("/image-upload", isAuth, upload.single("image"), authorService
  *         type: file
  *         description: The file to upload.
  *       - in: formData
- *         name: authorId
+ *         name: categoryId
  *         type: string
- *         description: The id of the author
+ *         description: The id of the category
  *     responses:
  *       200:
  *         description: The image was uploaded successfully
  *       404:
- *         description: The author was not found
+ *         description: The category was not found
  */

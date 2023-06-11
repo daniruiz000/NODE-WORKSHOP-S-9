@@ -3,11 +3,12 @@ import swaggerJsDoc from "swagger-jsdoc";
 import { swaggerOptions } from "../swagger-options";
 import express, { type Response, type Request } from "express";
 import { connect } from "../server/connect.middleware";
-import { authorRouter } from "./author.routes";
-import { bookRouter } from "./book.routes";
-import { publisherRouter } from "./publisher.routes";
+import { userRouter } from "./user.routes";
+import { categoryRouter } from "./category.routes";
+import { orderRouter } from "./order.routes";
 import { infoReq } from "../server/infoReq.middleware";
 import { checkErrorRequest } from "../domain/services/checkErrorRequest.middleware";
+import { cakeRouter } from "./cake.routes";
 
 export const configureRoutes = (app: any): any => {
   // Swagger
@@ -32,9 +33,10 @@ export const configureRoutes = (app: any): any => {
   app.use(connect);
 
   // Usamos las rutas
-  app.use("/author", authorRouter);
-  app.use("/book", bookRouter);
-  app.use("/publisher", publisherRouter);
+  app.use("/user", userRouter);
+  app.use("/category", categoryRouter);
+  app.use("/cake", cakeRouter);
+  app.use("/order", orderRouter);
   app.use("/public", express.static("public"));
   app.use("/", routerHome);
 
