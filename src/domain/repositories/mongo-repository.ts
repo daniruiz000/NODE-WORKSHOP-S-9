@@ -1,6 +1,6 @@
 // Cargamos variables de entorno
 // Importamos librerías
-import mongoose from "mongoose";
+import { Mongoose, connect } from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -15,11 +15,10 @@ const config = {
   dbName: DB_NAME,
 };
 
-export const mongoConnect = async (): Promise<mongoose.Mongoose | null> => {
+export const mongoConnect = async (): Promise<Mongoose | null> => {
   try {
-    const database: mongoose.Mongoose = await mongoose.connect(DB_CONNECTION, config);
-    const name = database.connection.name;
-    const host = database.connection.host;
+    const database: Mongoose = await connect(DB_CONNECTION, config);
+    const { name, host } = database.connection;
     console.log(`Conectado a la base de datos ${name} en el host ${host}`);
 
     return database;
